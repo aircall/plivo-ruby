@@ -27,6 +27,23 @@ module Plivo
 
   end
 
+  class APIResponse
+    attr_accessor :body
+
+    def initialize(response)
+      if response.present?
+        @code = response[0]
+        @body = response[1]
+      end
+    end
+
+    def is_successful?
+      @code.present? && @code < 400
+    end
+
+  end
+
+
   class RestAPI
     attr_accessor :auth_id, :auth_token, :url, :version, :api, :headers, :rest
 
