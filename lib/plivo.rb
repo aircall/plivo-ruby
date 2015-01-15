@@ -623,6 +623,8 @@ module Plivo
     def initialize(body, attributes={})
       if not body
         raise PlivoError, 'No text set for Speak'
+      else
+        body = HTMLEntities.new(:html4).encode(body, :decimal)
       end
       super(body, attributes)
     end
